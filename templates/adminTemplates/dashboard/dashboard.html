@@ -1,0 +1,55 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Home {% endblock %}
+
+{% block main-section %}
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Song List</h2>
+                        
+
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">SL No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                <td>1</td>
+                                <td>Despacito</td>
+                                <td>This is a popular song of the Internet!</td>
+                                <td><a href="#"><span class="badge badge-info">Edit</span></a>
+                                &nbsp;&nbsp;
+                                <a href="#"><span class="badge badge-danger">Delete</span></a></td>
+                                </tr>
+
+                            </tbody>
+                            </table>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

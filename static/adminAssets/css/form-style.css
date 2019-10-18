@@ -1,0 +1,48 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+  background: #9f89c5; /* fallback for old browsers */
+  /* background: linear-gradient(to right, #9f89c5, #b89ee4); */
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}
+
+.login-page {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.input-field>input:focus{
+	border-bottom: 1px solid #F13791 !important;
+	-webkit-box-shadow: 0 1px 0 0 #F13791 !important;
+	box-shadow: 0 1px 0 0 #F13791 !important; 
+}
+
+.input-field>small{
+	font-size: 1.0rem;
+	color: #F13791;
+}
+
+.input-field>span{
+  font-size: 1.5rem;
+  color: #9f89c5;
+  float: left;
+}
+
+.btn, .btn:active, .btn:hover{
+
+  background: #9f89c5 !important;
+  width: 100%;
+
+}
+
+.error-msg{
+  background: #F13791;
+  color: aliceblue;
+  padding: 10px;
+}
