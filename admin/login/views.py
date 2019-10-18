@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib import messages
 from django.contrib.auth import get_user_model, logout
-
+import re
 
 # Create your views here.
 
@@ -14,6 +14,14 @@ def index(request):
 def login(request):
 	username = request.POST['email']
 	password = request.POST['password']
+
+	if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
+		messages.error(request, 'Enter a valid Email')
+		return redirect('login')
+
+	if len(password) < 3:
+		messages.error(request, 'Provide a Valid Password')
+		return redirect('login')
 
 	UserModel = get_user_model()
 

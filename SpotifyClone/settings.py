@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'SpotifyClone',
     'admin',
     'admin.login',
+    'admin.dashboard',
+    'admin.genre',
 ]
 
 MIDDLEWARE = [
