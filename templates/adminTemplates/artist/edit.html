@@ -1,0 +1,63 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Artist Edit {% endblock %}
+
+{% block main-section %}
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Edit Artist Data</h2>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <small{% if message.tags %} class="error1 {{ message.tags }}"{% endif %}>{{ message }}</small>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form action="{% url 'artist-update' id=artist.id %}" method="post">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="artist-name">Artist Name</label>
+                                        <input name="name" type="text" class="form-control" id="artist-name" value="{{artist.artist_name}}">
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="artist-description">Artist Description</label>
+                                        <input name="desc" type="text" class="form-control" id="artist-description" value="{{artist.artist_des}}">
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col text-right">
+
+                                    <button type="submit" class="btn btn-outline-success">Update</button>
+
+                                    <button onclick="location.href='{% url 'artist-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </form>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

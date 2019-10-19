@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'admin.dashboard',
     'admin.genre',
     'admin.mood',
+    'admin.artist',
 ]
 
 MIDDLEWARE = [

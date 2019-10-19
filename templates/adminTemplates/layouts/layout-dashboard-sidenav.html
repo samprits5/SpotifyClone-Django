@@ -32,10 +32,10 @@
                     <a href="#artistSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-user-ninja"></i> Artists</a>
                     <ul class="collapse list-unstyled" id="artistSubmenu">
                         <li>
-                            <a href="#">Add New Artist</a>
+                            <a href="{% url 'artist-add' %}">Add New Artist</a>
                         </li>
                         <li>
-                            <a href="#">View Artists</a>
+                            <a href="{% url 'artist-index' %}">View Artists</a>
                         </li>
                     </ul>
 				</li>
