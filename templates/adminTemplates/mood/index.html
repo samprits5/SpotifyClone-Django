@@ -1,0 +1,59 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Mood Index {% endblock %}
+
+{% block main-section %}
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Mood List</h2>
+                        
+
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                <th scope="col">SL No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for row in data %}
+
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ row.mood_name }}</td>
+                                <td>{{ row.mood_des }}</td>
+                                <td><a href="{% url 'mood-edit' id=row.id %}"><span class="badge badge-info">Edit</span></a>
+                                &nbsp;&nbsp;
+                                <a href="{% url 'mood-delete' id=row.id %}"><span class="badge badge-danger">Delete</span></a></td>
+                                </tr>
+
+							{% endfor %}
+
+                            </tbody>
+                            </table>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

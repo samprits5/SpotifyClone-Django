@@ -20,10 +20,10 @@
                     <a href="#moodsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-headphones" aria-hidden="true"></i> Moods</a>
                     <ul class="collapse list-unstyled" id="moodsSubmenu">
                         <li>
-                            <a href="#">Add New Mood</a>
+                            <a href="{% url 'mood-add' %}">Add New Mood</a>
                         </li>
                         <li>
-                            <a href="#">View Moods</a>
+                            <a href="{% url 'mood-index' %}">View Moods</a>
                         </li>
                     </ul>
 				</li>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'admin.login',
     'admin.dashboard',
     'admin.genre',
+    'admin.mood',
 ]
 
 MIDDLEWARE = [

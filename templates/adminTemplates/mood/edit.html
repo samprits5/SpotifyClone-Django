@@ -1,6 +1,6 @@
 {% extends "adminTemplates/layouts/layout-dashboard.html" %}
 
-{% block title %} Admin Dashboard | Genre Edit {% endblock %}
+{% block title %} Admin Dashboard | Mood Edit {% endblock %}
 
 {% block main-section %}
 
@@ -9,7 +9,7 @@
 				<div class="row">
 					<div class="col-12 text-center">
 						<div class="main-section">
-							<h2 class="content-heading">Edit Genre Data</h2>
+							<h2 class="content-heading">Edit Mood Data</h2>
                         
                         {% if messages %}
                         <div class="alert alert-danger" role="alert">
@@ -19,7 +19,7 @@
                         </div>
                         {% endif %}
 
-                        <form action="{% url 'genre-update' id=genr.id %}" method="post">
+                        <form action="{% url 'mood-update' id=mood.id %}" method="post">
 
                             {% csrf_token %}
 
@@ -28,15 +28,15 @@
                                 <div class="col-6">
                                     <div class="form-group text-left">
 
-                                        <label for="genre-name">Genre Name</label>
-                                        <input name="name" type="text" class="form-control" id="genre-name" value="{{genr.genre_name}}">
+                                        <label for="mood-name">Mood Name</label>
+                                        <input name="name" type="text" class="form-control" id="mood-name" value="{{mood.mood_name}}">
                                       </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group text-left">
 
-                                        <label for="genre-description">Genre Description</label>
-                                        <input name="desc" type="text" class="form-control" id="genre-description" value="{{genr.genre_des}}">
+                                        <label for="mood-description">Mood Description</label>
+                                        <input name="desc" type="text" class="form-control" id="mood-description" value="{{mood.mood_des}}">
                                       </div>
                                 </div>
                                 
@@ -47,7 +47,7 @@
 
                                     <button type="submit" class="btn btn-outline-success">Update</button>
 
-                                    <button onclick="location.href='{% url 'genre-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                    <button onclick="location.href='{% url 'mood-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
                                 </div>
                             </div>
                         </form>
