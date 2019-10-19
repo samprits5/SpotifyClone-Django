@@ -6,4 +6,5 @@ urlpatterns = [
     path('genre/', include('admin.genre.urls')),
     path('moods/', include('admin.mood.urls')),
     path('artist/', include('admin.artist.urls')),
+    path('songs/', include('admin.song.urls')),
 ]

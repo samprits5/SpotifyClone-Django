@@ -1,0 +1,132 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Song Add {% endblock %}
+
+{% block main-section %}
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Add New Song</h2>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <small{% if message.tags %} class="error1 {{ message.tags }}"{% endif %}>{{ message }}</small>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form action="{% url 'song-save' %}" method="post" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song-name">Song Name</label>
+                                        <input name="name" type="text" class="form-control" id="song-name" placeholder="Add a new song">
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song-description">Song Description</label>
+                                        <input name="desc" type="text" class="form-control" id="song-description" placeholder="Add a new song description">
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+							
+							<div class="row">
+						    	<div class="col-6">
+									<div class="form-group text-left">
+
+						                <label for="song-length">Song Length</label>
+						                <input name="length" type="text" class="form-control" id="song-length" placeholder="Add the song length">
+						              </div>
+						    	</div>
+						    	<div class="col-6">
+
+						    		<div class="form-group text-left">
+									    <label for="artist-menu">Select Artist</label>
+									    <select name="artist" class="form-control" id="artist-menu">
+									    {% for row in artist %}
+									      <option value="{{ row.id }}">{{ row.artist_name }}</option>
+									     {% endfor %}
+									    </select>
+									  </div>
+
+						    	</div>
+						    </div>
+
+						    <div class="row">
+						    	<div class="col-6">
+
+						    		<div class="form-group text-left">
+									    <label for="genre-menu">Select Genre</label>
+									    <select name="genre" class="form-control" id="genre-menu">
+									    {% for row in genre %}
+									      <option value="{{ row.id }}">{{ row.genre_name }}</option>
+									     {% endfor %}
+									    </select>
+									  </div>
+									
+						    	</div>
+						    	<div class="col-6">
+									
+									<div class="form-group text-left">
+									    <label for="mood-menu">Select Mood</label>
+									    <select name="mood" class="form-control" id="mood-menu">
+									    {% for row in mood %}
+									      <option value="{{ row.id }}">{{ row.mood_name }}</option>
+									     {% endfor %}
+									    </select>
+									  </div>
+
+						    	</div>
+						    </div>
+
+						    <div class="row">
+						    	<div class="col-12 file_upload_song">
+
+						    		<h6>Upload Song</h6>
+
+						    		<div class="input-group mb-3">
+									  <div class="custom-file">
+									    <input name="file" type="file" class="custom-file-input" id="song_file">
+									    <label class="custom-file-label" for="song_file" aria-describedby="inputGroupFileAddon02">Choose file</label>
+									  </div>
+									</div>
+
+
+						    	</div>
+						    </div>
+
+
+
+                            <div class="row">
+                                <div class="col text-right">
+
+                                    <button type="submit" class="btn btn-outline-success">Submit</button>
+
+                                    <button onclick="location.href='{% url 'song-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                            
+                        </form>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

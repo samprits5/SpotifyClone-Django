@@ -1,0 +1,71 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Song Index {% endblock %}
+
+{% block main-section %}
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Songs List</h2>
+                        
+
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+							      <th scope="col">Sl No</th>
+							      <th scope="col">Name</th>
+							      <th scope="col">Length</th>
+							      <th scope="col">Artist</th>
+							      <th scope="col">Genre</th>
+							      <th scope="col">Action</th>
+							    </tr>
+                            </thead>
+                            <tbody>
+							{% load static %}
+                            {% for row in data %}
+
+                                <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                	{{ row.song_name }}<img id="speaker-anim-{{ forloop.counter }}" class="hide-gif" src='{% static "./adminAssets/images/speaker.gif" %}' alt="">
+                                </td>
+                                <td>{{ row.song_length }}</td>
+                                <td>{{ row.artist_name }}</td>
+                                <td>{{ row.genre_name }}</td>
+                                <td>
+                                	<a href="#" onclick="playmusic({{ forloop.counter }});">
+          <span id="span{{ forloop.counter }}" class="badge badge-primary">Play</span>
+        </a>
+        <audio onended="endAudio()" id="audio{{ forloop.counter }}" src="{{ row.song_file.url }}"></audio>&nbsp;&nbsp;
+                                	<a href="{% url 'genre-edit' id=row.id %}"><span class="badge badge-info">Edit</span></a>
+                                &nbsp;&nbsp;
+                                	<a href="{% url 'song-delete' id=row.id %}"><span class="badge badge-danger">Delete</span></a>
+                            	</td>
+                                </tr>
+
+							{% endfor %}
+
+                            </tbody>
+                            </table>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

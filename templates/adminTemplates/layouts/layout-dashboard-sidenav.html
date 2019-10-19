@@ -44,10 +44,10 @@
                     <a href="#songsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-music"></i> Songs</a>
                     <ul class="collapse list-unstyled" id="songsSubmenu">
                         <li>
-                            <a href="#">Add New Songs</a>
+                            <a href="{% url 'song-add' %}">Add New Songs</a>
                         </li>
                         <li>
-                            <a href="#">View Songs</a>
+                            <a href="{% url 'song-index' %}">View Songs</a>
                         </li>
                     </ul>
 				</li>
