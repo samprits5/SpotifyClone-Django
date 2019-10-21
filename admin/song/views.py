@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from admin.genre.models import Genre
 from admin.mood.models import Mood
 from admin.artist.models import Artist
@@ -123,6 +123,139 @@ def delete(request, id):
 			messages.success(request, 'Record Deleted!')
 
 		return redirect('song-index')
+
+
+@login_required(login_url='login')
+def edit(request, id):
+
+	if request.method == 'GET':
+
+		song = Song.objects.filter(pk=id)
+
+		genre = Genre.objects.all()
+
+		mood = Mood.objects.all()
+
+		artist = Artist.objects.all()
+
+		if not song:
+			messages.error(request, 'No such records found!')
+			return redirect('song-index')
+		else:
+			song = song.get()
+
+			return render(request, 'adminTemplates/song/edit.html', {'song':song, 'genre':genre, 'mood':mood, 'artist':artist})
+
+
+@login_required(login_url='login')
+def update(request, id):
+
+	if request.method == 'POST':
+
+		name = request.POST['name']
+		desc = request.POST['desc']
+		length = request.POST['length']
+		mood_id = request.POST['mood']
+		genre_id = request.POST['genre']
+		artist_id = request.POST['artist']
+
+
+
+		artist = Artist.objects.filter(pk=artist_id)
+
+		if not artist:
+			messages.error(request, 'No such Artist found!')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		else:
+			artist = artist.get()
+
+
+		genre = Genre.objects.filter(pk=genre_id)
+
+		if not genre:
+			messages.error(request, 'No such Genre found!')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		else:
+			genre = genre.get()
+
+
+		mood = Mood.objects.filter(pk=mood_id)
+
+		if not mood:
+			messages.error(request, 'No such Mood found!')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+		else:
+			mood = mood.get()
+
+
+
+		if not re.match('^[(a-z)?(A-Z)?(0-9)?_?-?\.?\,?\s]+$',name):
+
+			messages.error(request, 'Enter a valid Song Name')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+		if not re.match('^[(a-z)?(A-Z)?(0-9)?_?-?\.?\,?!?\s]+$',desc):
+
+			messages.error(request, 'Enter a valid Song Description')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+		if not re.match('^\d{2}:\d{2}$',length):
+
+			messages.error(request, 'Enter a valid Song Length')
+			return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+		song = Song.objects.filter(pk=id)
+
+		if not song:
+			messages.error(request, 'No such records found!')
+			return redirect('song-index')
+		else:
+			song = song.get()
+
+
+
+		if 'file' in request.FILES:
+
+			songFile = request.FILES['file']
+
+			if not songFile.name.split('.')[-1] in ['mp3','wav']:
+
+				messages.error(request, 'Invalid File Type')
+				return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+			song.song_file.delete()
+
+			song.song_name = name
+			song.song_des = desc
+			song.song_length = length
+			song.artist_name = artist
+			song.mood_name = mood
+			song.genre_name = genre
+			song.song_file = songFile
+
+			song.save()
+
+			messages.success(request, 'Record Updated!')
+			
+			return redirect('song-index')
+
+
+		else:
+
+			song.song_name = name
+			song.song_des = desc
+			song.song_length = length
+			song.artist_name = artist
+			song.mood_name = mood
+			song.genre_name = genre
+
+			song.save()
+
+			messages.success(request, 'Record Updated!')
+			
+			return redirect('song-index')
 
 
 

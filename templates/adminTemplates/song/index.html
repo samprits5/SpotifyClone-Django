@@ -49,7 +49,7 @@
           <span id="span{{ forloop.counter }}" class="badge badge-primary">Play</span>
         </a>
         <audio onended="endAudio()" id="audio{{ forloop.counter }}" src="{{ row.song_file.url }}"></audio>&nbsp;&nbsp;
-                                	<a href="{% url 'genre-edit' id=row.id %}"><span class="badge badge-info">Edit</span></a>
+                                	<a href="{% url 'song-edit' id=row.id %}"><span class="badge badge-info">Edit</span></a>
                                 &nbsp;&nbsp;
                                 	<a href="{% url 'song-delete' id=row.id %}"><span class="badge badge-danger">Delete</span></a>
                             	</td>
