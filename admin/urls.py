@@ -7,4 +7,5 @@ urlpatterns = [
     path('moods/', include('admin.mood.urls')),
     path('artist/', include('admin.artist.urls')),
     path('songs/', include('admin.song.urls')),
+    path('users/', include('admin.user.urls')),
 ]

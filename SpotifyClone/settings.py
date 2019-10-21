@@ -45,7 +45,10 @@ INSTALLED_APPS = [
     'admin.mood',
     'admin.artist',
     'admin.song',
+    'admin.user',
 ]
+
+AUTH_USER_MODEL = "user.CustomUser" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
