@@ -52,6 +52,8 @@
                                 	<a href="{% url 'song-edit' id=row.id %}"><span class="badge badge-info">Edit</span></a>
                                 &nbsp;&nbsp;
                                 	<a href="{% url 'song-delete' id=row.id %}"><span class="badge badge-danger">Delete</span></a>
+                                &nbsp;
+                                    <a href="{% url 'song-details' id=row.id %}"><span class="badge badge-success">More</span></a>
                             	</td>
                                 </tr>
 

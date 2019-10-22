@@ -1,0 +1,111 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | Song Details {% endblock %}
+
+{% block main-section %}
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Detail Song Data</h2>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <small{% if message.tags %} class="error1 {{ message.tags }}"{% endif %}>{{ message }}</small>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form action="#" method="post">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song-name">Song Name</label>
+                                        <input name="name" type="text" class="form-control" id="song-name" value="{{song.song_name}}" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song_desc">Song Description</label>
+                                        <input name="text" type="text" class="form-control" id="song_desc" value="{{song.song_des}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song_length">Song Length</label>
+                                        <input name="length" type="text" class="form-control" id="song_length" value="{{song.song_length}}" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="artist_name">Artist Name</label>
+                                        <input name="text" type="text" class="form-control" id="artist_name" value="{{song.artist_name}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song_genre">Genre Name</label>
+                                        <input name="genre" type="text" class="form-control" id="song_genre" value="{{song.genre_name}}" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="song_mood">Mood Name</label>
+                                        <input name="text" type="text" class="form-control" id="song_mood" value="{{song.mood_name}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <div class="form-group text-left">
+
+                                        <label for="filepath">File Path</label>
+                                        <input name="filepath" type="text" class="form-control" id="filepath" value="{{song.song_file}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col text-right">
+
+                                    <button onclick="location.href='{% url 'song-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </form>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

@@ -8,4 +8,4 @@ class CustomUser(AbstractUser):
 
 	usr_gender = models.CharField(max_length=10)
 
-	profile_pic = models.FileField(upload_to='profile/', default='settings.MEDIA_ROOT/profile/team.jpg')
+	profile_pic = models.FileField(upload_to='profile/', default='profile/team.jpg')

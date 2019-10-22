@@ -1,0 +1,92 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | User Details {% endblock %}
+
+{% block main-section %}
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Detail User Data</h2>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <small{% if message.tags %} class="error1 {{ message.tags }}"{% endif %}>{{ message }}</small>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form action="#" method="post">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="user-name">User Name</label>
+                                        <input name="name" type="text" class="form-control" id="user-name" value="{{usr.username}}" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="user-email">User Email</label>
+                                        <input name="email" type="text" class="form-control" id="user-email" value="{{usr.email}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="user-gender">Gender</label>
+                                        <input name="gender" type="text" class="form-control" id="user-gender" value="{{usr.usr_gender}}" readonly>
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="user-number">Number</label>
+                                        <input name="number" type="text" class="form-control" id="user-number" value="{{usr.usr_phone}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-12">
+                                    <div class="form-group text-left">
+
+                                        <label for="filepath">File Path</label>
+                                        <input name="filepath" type="text" class="form-control" id="filepath" value="{{usr.profile_pic}}" readonly>
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+                                <div class="col text-right">
+
+                                    <button onclick="location.href='{% url 'user-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </form>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}

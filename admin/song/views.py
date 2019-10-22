@@ -258,7 +258,20 @@ def update(request, id):
 			return redirect('song-index')
 
 
+@login_required(login_url='login')
+def details(request, id):
 
+	if request.method == 'GET':
+
+		song = Song.objects.filter(pk=id)
+
+		if not song:
+			messages.error(request, 'No such records found!')
+			return redirect('user-index')
+		else:
+			song = song.get()
+
+			return render(request, 'adminTemplates/song/details.html', {'song':song})
 
 
 

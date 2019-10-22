@@ -1,6 +1,6 @@
 {% extends "adminTemplates/layouts/layout-dashboard.html" %}
 
-{% block title %} Admin Dashboard | Users Index {% endblock %}
+{% block title %} Admin Dashboard | Favorites Index {% endblock %}
 
 {% block main-section %}
 
@@ -18,16 +18,16 @@
 				<div class="row">
 					<div class="col-12 text-center">
 						<div class="main-section">
-							<h2 class="content-heading">User List</h2>
+							<h2 class="content-heading">Favorite List</h2>
                         
 
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
                                 <th scope="col">SL No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Gender</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Song Name</th>
+                                <th scope="col">Artist Name</th>
                                 <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -37,12 +37,12 @@
 
                                 <tr>
                                 <td>{{ forloop.counter }}</td>
-                                <td>{{ row.username }}</td>
-                                <td>{{ row.email }}</td>
-                                <td>{{ row.usr_gender }}</td>
-                                <td><a href="{% url 'favorite-details' id=row.id %}"><span class="badge badge-danger">Favorites</span></a>
-                                &nbsp;&nbsp;
-                                <a href="{% url 'user-details' id=row.id %}"><span class="badge badge-info">More...</span></a></td>
+                                <td>{{ row.user.username }}</td>
+                                <td>{{ row.song.song_name }}</td>
+                                <td>{{ row.song.artist_name }}</td>
+                                <td>
+                                    <a href="{% url 'song-details' id=row.song_id %}"><span class="badge badge-info">Song Details...</span></a>
+                                </td>
                                 </tr>
 
 							{% endfor %}
