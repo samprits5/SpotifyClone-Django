@@ -1,6 +1,6 @@
     	<nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Spotify Dashboard</h3>
+                <a href="{% url 'dashboard' %}"><h3>Spotify Dashboard</h3></a>
             </div>
 
             <ul class="list-unstyled components">
@@ -75,7 +75,7 @@
                     <a href="#homepageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-home"></i>&nbsp;&nbsp;Homepage</a>
                     <ul class="collapse list-unstyled" id="homepageSubmenu">
                         <li>
-                            <a href="#">Manage Homepage</a>
+                            <a href="{% url 'homepage-index' %}">Manage Homepage</a>
                         </li>
                     </ul>
                 </li>

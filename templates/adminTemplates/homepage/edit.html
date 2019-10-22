@@ -1,0 +1,81 @@
+{% extends "adminTemplates/layouts/layout-dashboard.html" %}
+
+{% block title %} Admin Dashboard | HomePage Edit {% endblock %}
+
+{% block main-section %}
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<div class="main-section">
+							<h2 class="content-heading">Edit HomePage Song Data</h2>
+                        
+                        {% if messages %}
+                        <div class="alert alert-danger" role="alert">
+                                {% for message in messages %}
+                                <small{% if message.tags %} class="error1 {{ message.tags }}"{% endif %}>{{ message }}</small>
+                                {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <form action="{% url 'homepage-update' id=homepage.id %}" method="post">
+
+                            {% csrf_token %}
+
+                            <div class="row">
+
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="name">Card Title</label>
+                                        <input name="name" type="text" class="form-control" id="name" value="{{homepage.name}}">
+                                      </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group text-left">
+
+                                        <label for="artist">Card Artist Name</label>
+                                        <input name="artist" type="text" class="form-control" id="artist" value="{{homepage.artist}}">
+                                      </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-12">
+
+                                	<div class="form-group text-left">
+									    <label for="song-menu">Select Song</label>
+									    <select name="song" class="form-control" id="song-menu">
+									    {% for row in song %}
+									      <option {% if row.id == homepage.song_id %}selected{% endif %} value="{{ row.id }}">{{ row.song_name }}</option>
+									     {% endfor %}
+									    </select>
+									  </div>
+
+                                </div>
+                                
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col text-right">
+
+                                    <button type="submit" class="btn btn-outline-success">Update</button>
+
+                                    <button onclick="location.href='{% url 'homepage-index' %}'" type="button" class="btn btn-outline-secondary">Dismiss</button>
+                                </div>
+                            </div>
+                        </form>
+
+							
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+{% endblock %}
