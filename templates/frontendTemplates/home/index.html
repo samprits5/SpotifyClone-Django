@@ -1,0 +1,124 @@
+{% extends "frontendTemplates/layouts/frame-home.html" %}
+
+{% block title %} Spotify Clone | Spotihy {% endblock %}
+
+{% block main-content %}
+
+
+{% load static %}
+
+{% if user.is_authenticated %}
+
+<section id="section-banner">
+    <img src='{% static "./images/a.jpg" %}' alt="">
+</section>
+
+<section id="section-song">
+    <div class="songs">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-10 m-auto">
+                    <h1>Looking for music?</h1>
+                    <h3>
+                        Start listening to the best new releases.
+                    </h3>
+                    <a href="#" class="button-webPlay">Launch Web Player</a>
+                </div>
+            </div>
+            <div class="row cstm-mar">
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row cstm-mar">
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class=" songs-col">
+                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <a href="#" class="songs-col-overlay">
+                            <div class="songs-col-caption">
+                                <h2>Liar</h2>
+                                <p>Camila Cabello</p>
+                                <p class="playLink">play now</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+<section id="section-guest">
+    <div class="guest">
+        <div class="container">
+            <div class="guest-content">
+                <h2>Music for everyone</h2>
+                <p>Millions of songs</p>
+                <a href="#">sign up here</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+
+{% endblock %}

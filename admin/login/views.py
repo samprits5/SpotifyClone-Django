@@ -29,6 +29,10 @@ def login(request):
 	try:
 		user = UserModel.objects.get(email=username)
 
+		if not user.is_superuser:
+			messages.error(request, "You don't have the permission to Log In!")
+			return redirect('login')
+
 		if user.check_password(password):
 			auth_login(request, user)
 			messages.success(request, 'Login Success!')
