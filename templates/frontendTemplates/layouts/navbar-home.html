@@ -17,18 +17,21 @@
                             <a class="nav-link" href="#">Upgrade</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ user.name }}</a>
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Profile
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Account</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="{% url 'home-logout' %}">Logout</a>
                             </div>
                         </li>
                         {% else %}
 						<li class="nav-item">
-                            <a class="nav-link" href="#">Log In</a>
+                            <a class="nav-link" href="{% url 'home-login' %}">Log In</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'home-signup' %}">Sign Up!</a>

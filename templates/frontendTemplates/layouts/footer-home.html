@@ -21,7 +21,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="footer-link">
+                                            <a href="{% url 'home-logout' %}" class="footer-link">
                                                 Log Out
                                             </a>
                                         </li>
@@ -29,12 +29,12 @@
 										{% else %}
 
                                         <li>
-                                            <a href="#" class="footer-link">
+                                            <a href="{% url 'home-signup' %}" class="footer-link">
                                                 Sign Up
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" class="footer-link">
+                                            <a href="{% url 'home-login' %}" class="footer-link">
                                                 Log In
                                             </a>
                                         </li>

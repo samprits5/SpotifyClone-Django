@@ -1106,7 +1106,6 @@ a.viewMore:hover {
   height: 450px;
   position: relative;
   z-index: 0;
-  display: none;
 }
 #section-banner:after {
   content: "";

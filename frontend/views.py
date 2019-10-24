@@ -2,12 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from admin.user.models import CustomUser
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model, logout
+from django.contrib.auth import login as auth_login
+from admin.homepage.models import Homepage
 import re
 
 # Create your views here.
 
 def index(request):
-	return render(request, 'frontendTemplates/home/index.html')
+	
+	data = Homepage.objects.all()
+
+	return render(request, 'frontendTemplates/home/index.html', {'data':data})
 
 
 
@@ -49,7 +55,39 @@ def signup_post(request):
 		return redirect('home-signup')
 
 
+def login(request):
+	return render(request, 'frontendTemplates/login/index.html')
 
 
+def login_post(request):
+	username = request.POST['email']
+	password = request.POST['password']
+
+	if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
+		messages.error(request, 'Enter a valid Email')
+		return redirect('home-login')
+
+	if len(password) < 3:
+		messages.error(request, 'Provide a Valid Password')
+		return redirect('home-login')
+
+	UserModel = get_user_model()
 
 
+	try:
+		user = UserModel.objects.get(email=username)
+
+		if user.check_password(password):
+			auth_login(request, user)
+			return redirect('home-index')
+		else:
+			messages.error(request, 'Invalid Password!')
+			return redirect('home-login')
+
+	except UserModel.DoesNotExist:
+		messages.error(request, 'Invalid Email!')
+		return redirect('home-login')
+
+def logout_post(request):
+    logout(request)
+    return redirect('home-index')

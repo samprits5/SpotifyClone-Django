@@ -25,82 +25,34 @@
                     <a href="#" class="button-webPlay">Launch Web Player</a>
                 </div>
             </div>
+
+
             <div class="row cstm-mar">
+            {% if data is None %}
+                <h2>No data!!</h2>
+            {%endif%}
+                {% for row in data %}
                 <div class="col-4">
                     <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
+                        <img src='{% static "./images/home{{forloop.counter}}.jpg" %}' alt="">
                         <a href="#" class="songs-col-overlay">
                             <div class="songs-col-caption">
-                                <h2>Liar</h2>
+                                <h2>row.name</h2>
                                 <p>Camila Cabello</p>
                                 <p class="playLink">play now</p>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
-                            <div class="songs-col-caption">
-                                <h2>Liar</h2>
-                                <p>Camila Cabello</p>
-                                <p class="playLink">play now</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
-                            <div class="songs-col-caption">
-                                <h2>Liar</h2>
-                                <p>Camila Cabello</p>
-                                <p class="playLink">play now</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                {% endfor %}
+                
             </div>
-            <div class="row cstm-mar">
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
-                            <div class="songs-col-caption">
-                                <h2>Liar</h2>
-                                <p>Camila Cabello</p>
-                                <p class="playLink">play now</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
-                            <div class="songs-col-caption">
-                                <h2>Liar</h2>
-                                <p>Camila Cabello</p>
-                                <p class="playLink">play now</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/b.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
-                            <div class="songs-col-caption">
-                                <h2>Liar</h2>
-                                <p>Camila Cabello</p>
-                                <p class="playLink">play now</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            
+
+
+
+
+
         </div>
     </div>
 </section>
