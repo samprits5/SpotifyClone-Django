@@ -16,7 +16,7 @@
                                     <ul>
                                     	{% if user.is_authenticated %}
                                         <li>
-                                            <a href="#" class="footer-link">
+                                            <a href="{% url 'account-index' %}" class="footer-link">
                                                 Account
                                             </a>
                                         </li>
@@ -48,7 +48,7 @@
                                     <h3>Player</h3>
                                     <ul>
                                         <li>
-                                            <a href="#" class="footer-link">
+                                            <a href="{% url 'player-index' %}" class="footer-link">
                                                 Web Player
                                             </a>
                                         </li>

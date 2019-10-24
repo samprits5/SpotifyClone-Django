@@ -1,0 +1,62 @@
+
+{% extends "frontendTemplates/layouts/frame-account.html" %}
+
+{% block title %} Spotify Clone | Account Overview {% endblock %}
+
+{% block main-content %}
+
+
+
+<div class="col-9">
+    <div class="section-content">
+        <h3>Account Overview</h3>
+        
+        {% if messages %}
+        <div class="alert alert-danger" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+
+        <form id="editForm" class="form-account form">
+
+            <div class="form-group">
+                <label for="inputState__">Account Name</label>
+                <div class="form-input-bg">
+                    <input type="text" class="form-control" id="inputEmail4" value="{{usr.name}}" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail4">Email</label>
+                <div class="form-input-bg">
+                    <input type="text" class="form-control" id="inputEmail4" value="{{usr.email}}" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputState__">Gender</label>
+                <div class="form-input-bg">
+                    <input type="text" class="form-control" id="inputEmail4" value="{{usr.usr_gender}}" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword4">Mobile</label>
+                <div class="form-input-bg">
+                    <input type="text" class="form-control" id="inputPassword4" value="{{usr.usr_phone}}" readonly>
+                </div>
+            </div>
+            <div class="text-right">
+                <button type="button" onclick="location.href = '{% url 'account-edit' %}'" class="button">Edit Profile</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

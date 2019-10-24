@@ -1,0 +1,49 @@
+<div class="col-3">
+                    <div class="section-menu">
+                        <div class="section-menu-user">
+                            <div class="section-menu-user-img">
+                                <!-- <img src="./images/user.svg" alt="user"> -->
+                                <img src='{{usr.profile_pic.url}}' alt="user">
+                                <label for="addUserImg" id="addUserImg-label">
+                                    <i class="fas fa-user-edit"></i>
+                                </label>
+                                <input type="file" name="addUserImg" id="addUserImg">
+                            </div>
+
+                        </div>
+                        <ul class="section-menu-nav">
+                            <li class="section-menu-nav-item">
+                                <a href="{% url 'account-index' %}" class="d-block section-menu-nav-link">
+                                    <span>
+                                        <i class="fas fa-home"></i>
+                                    </span>
+                                    Account overview
+                                </a>
+                            </li>
+                            <li class="section-menu-nav-item">
+                                <a href="{% url 'account-edit' %}" class="d-block section-menu-nav-link">
+                                    <span>
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </span>
+                                    Edit profile
+                                </a>
+                            </li>
+                            <li class="section-menu-nav-item">
+                                <a href="#" class="d-block section-menu-nav-link">
+                                    <span>
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    Change password
+                                </a>
+                            </li>
+                            <li class="section-menu-nav-item">
+                                <a href="#" class="d-block section-menu-nav-link">
+                                    <span>
+                                        <i class="fas fa-user-lock"></i>
+                                    </span>
+                                    Privacy settings
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>

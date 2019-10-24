@@ -1,0 +1,52 @@
+</div>
+{% load static %}
+        <footer id="player-main" class="player">
+            <div class="player-song">
+                <div class="player-song-img">
+                    <img src='{% static "./images/piano.jpg" %}' alt="piano">
+                </div>
+
+                <div class="player-song-name">
+                    <a href="#">
+                        <h3>{{ song.song_name }}</h3>
+                    </a>
+                    <a href="#">By {{ song.artist_name }}</a>
+
+                </div>
+                <div class="player-song-addFav">
+                    <button type="button" class="addToFav" id="addToFav"></button>
+                </div>
+            </div>
+            <div class="player-controls-main">
+                <div class="player-controls">
+                    <button id="repeat" class="player-controls-btn"></button>
+                    <button id="prev" class="player-controls-btn disabled"></button>
+                    <button id="play" class="player-controls-btn"></button>
+                    <button id="next" class="player-controls-btn"></button>
+                    <div id="volume">
+                        <button id="volume-icon" class="player-controls-btn"></button>
+                        <div id="volume-range-main">
+                            <div id="volume-range">
+                                <div id="volume-range-bar" data-value="100"></div>
+                                <div id="volume-range-thumb"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="player-controls-duration">
+                    <span id="startTime">00:00</span>
+                    <div id="duration-range-main">
+                        <div id="duration-range">
+                            <div id="duration-range-bar"></div>
+                            <div id="duration-range-thumb"></div>
+                        </div>
+                    </div>
+                    <span id="endTime">{{ song.song_length }}</span>
+                </div>
+
+                <audio id="musicPlayer" src="{{ song.song_file.url }}"></audio>
+            </div>
+            <!-- <div class="player-menu"></div> -->
+        </footer>
+    </div>

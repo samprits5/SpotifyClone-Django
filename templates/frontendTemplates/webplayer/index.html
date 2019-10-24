@@ -1,0 +1,46 @@
+{% extends "frontendTemplates/layouts/frame-player.html" %}
+
+{% block title %} Spotify Clone | Webplayer {% endblock %}
+
+{% block main-content %}
+
+
+<section id="section-main">
+    <div class="filterNav">
+        <a href="#" class="filterNav-link active">Featured</a>
+        <a href="#" class="filterNav-link">Categories</a>
+        <a href="#" class="filterNav-link">Genre</a>
+        <a href="#" class="filterNav-link">Mood</a>
+        <a href="#" class="filterNav-link">Artist</a>
+        <a href="#" class="filterNav-link">Favorites</a>
+    </div>
+    <div class="music">
+        <div class="music-page">
+            <div class="music-head">
+                <div class="music-head-item">
+                    <h1>New Releases</h1>
+                </div>
+            </div>
+            {% load static %}
+            <div class="music-row">
+            	{% for row in data %}
+                <a href='{% url "player-index-id" sid=row.song_id %}' class="music-col">
+                    <div class="music-img">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                        <button class="music-playBtn">
+                            <img src='{% static "./images/play.svg" %}' alt="play">
+                        </button>
+                    </div>
+                    <h3>{{ row.name }}</h3>
+                    <h5>{{ row.artist }}</h5>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

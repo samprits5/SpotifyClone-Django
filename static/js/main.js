@@ -41,7 +41,6 @@ $(document).ready(function () {
                 totDur = getDurMin($musicPlayer.duration);
             $(function () {
                 $("#startTime").text(curTime.min + " : " + curTime.sec)
-                $("#endTime").text(totDur.min + " : " + totDur.sec)
             })
             /*-----------------------------------------------
                 Repeat Control Starts

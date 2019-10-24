@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from admin.user.models import CustomUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model, logout
@@ -88,6 +89,7 @@ def login_post(request):
 		messages.error(request, 'Invalid Email!')
 		return redirect('home-login')
 
+@login_required(login_url='home-login')
 def logout_post(request):
     logout(request)
     return redirect('home-index')

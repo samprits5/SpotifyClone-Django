@@ -22,23 +22,21 @@
                     <h3>
                         Start listening to the best new releases.
                     </h3>
-                    <a href="#" class="button-webPlay">Launch Web Player</a>
+                    <a href="{% url 'player-index' %}" class="button-webPlay">Launch Web Player</a>
                 </div>
             </div>
 
 
             <div class="row cstm-mar">
-            {% if data is None %}
-                <h2>No data!!</h2>
-            {%endif%}
                 {% for row in data %}
-                <div class="col-4">
-                    <div class=" songs-col">
-                        <img src='{% static "./images/home{{forloop.counter}}.jpg" %}' alt="">
-                        <a href="#" class="songs-col-overlay">
+                <div class="col-4" style="padding: 10px;">
+                    <div class="songs-col">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="">
+                        <a href='{% url "player-index-id" sid=row.song_id %}' class="songs-col-overlay">
                             <div class="songs-col-caption">
-                                <h2>row.name</h2>
-                                <p>Camila Cabello</p>
+                                <h2>{{row.name}}</h2>
+                                <p>{{row.artist}}</p>
                                 <p class="playLink">play now</p>
                             </div>
                         </a>

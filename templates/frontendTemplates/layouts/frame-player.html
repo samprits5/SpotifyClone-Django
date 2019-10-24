@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width ,  initial-scale=1.0" name="viewport">
+    <!-- CSS Libraries -->
+    <link href='{% static "./css/bootstrap.min.css" %}' rel="stylesheet">
+
+    <link href='{% static "./css/fontawesome.all.min.css" %}' rel="stylesheet">
+
+    <link href='{% static "./css/main.css" %}' rel="stylesheet">
+
+    <title>
+        {% block title %} Spotify Clone {% endblock %}
+    </title>
+</head>
+
+<body>
+
+	{% include "frontendTemplates/layouts/sidebar-player.html" %}
+
+
+	{% block main-content %}
+
+    {% endblock %}
+
+
+	{% include "frontendTemplates/layouts/footer-player.html" %}
+
+    <!-- All Javascript/Jqueries -->
+    <script src='{% static "./js/jquery.min.js" %}'></script>
+
+    <script src='{% static "./js/bootstrap.bundle.min.js" %}'></script>
+
+    <script src='{% static "./js/jquery-ui.min.js" %}'></script>
+
+    <script src='{% static "./js/main.js" %}'></script>
+</body>
+
+</html>

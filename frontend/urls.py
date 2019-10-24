@@ -8,4 +8,6 @@ urlpatterns = [
     path('login/', views.login, name='home-login'),
     path('login/post', views.login_post, name='home-login-post'),
     path('logout/', views.logout_post, name='home-logout'),
+    path('account/', include('frontend.account.urls')),
+    path('webplayer/', include('frontend.webplayer.urls')),
 ]
