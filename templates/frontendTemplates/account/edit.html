@@ -1,7 +1,7 @@
 
 {% extends "frontendTemplates/layouts/frame-account.html" %}
 
-{% block title %} Spotify Clone | Account Overview {% endblock %}
+{% block title %} Spotify Clone | Account Edit Profile {% endblock %}
 
 {% block main-content %}
 
@@ -43,7 +43,13 @@
             <div class="form-group">
                 <label for="inputState__">Gender</label>
                 <div class="form-input-bg">
-                    <input type="text" name="gender" class="form-control" id="inputEmail4" value="{{usr.usr_gender}}">
+                        <select id="gender" class="form-control" name="gender">
+                                <option>-- Select --</option>
+                                <option value="Male" {% if usr.usr_gender == "Male" %} selected {% endif %} >Male</option>
+                                <option value="Female" {% if usr.usr_gender == "Female" %} selected {% endif %} >Female</option>
+                                <option value="Not Listed" {% if usr.usr_gender == "Not Listed" %} selected {% endif %} >Not Listed</option>
+                            </select>
+                    <!-- <input type="text" name="gender" class="form-control" id="inputEmail4" value="{{usr.usr_gender}}"> -->
                 </div>
             </div>
 

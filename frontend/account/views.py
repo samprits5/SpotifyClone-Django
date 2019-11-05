@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login as auth_login
+from django.views.decorators.csrf import csrf_exempt
 from admin.user.models import CustomUser
 import re
+import json
 # Create your views here.
 
 
@@ -84,14 +90,86 @@ def update(request):
 			
 			return redirect('account-index')
 
+@login_required(login_url='home-login')
+def edit_pass(request):
+	usr = CustomUser.objects.filter(pk=request.user.id)
+
+	if not usr:
+		messages.error(request, 'Log In First!')
+		return redirect('home-login')
+	else:
+		usr = usr.get()
+	return render(request, 'frontendTemplates/account/edit-pass.html', {'usr':usr})
 
 
+@login_required(login_url='home-login')
+def update_pass(request):
+	
+	if request.method == 'POST':
+
+		cpass = request.POST['cur-pass']
+		npass = request.POST['new-pass']
+		conpass = request.POST['con-pass']
+
+		if (len(cpass) < 3) or (len(npass) < 3) or (len(conpass) < 3):
+			messages.error(request, 'Password Length should be more than 3 characters!')
+			return redirect('account-edit-pass')
+
+		UserModel = get_user_model()
+
+		try:
+			user = UserModel.objects.get(pk=request.user.id)
+
+			if user.check_password(cpass):
+
+				if npass != conpass:
+					messages.error(request, 'New Password does not match with Confirm Password!')
+					return redirect('account-edit-pass')
+
+				user.password = make_password(npass)
+				user.save()
+
+				auth_login(request, user)
+
+				messages.success(request, 'Password Changed Successfully!')
+				return redirect('account-index')
+
+			else:
+				messages.error(request, 'Current Password does not match!')
+				return redirect('account-edit-pass')
+
+		except UserModel.DoesNotExist:
+			messages.error(request, 'Log In First!')
+			return redirect('home-login')
 
 
+@login_required(login_url='home-login')
+def privacy(request):
+	usr = CustomUser.objects.filter(pk=request.user.id)
 
+	if not usr:
+		messages.error(request, 'Log In First!')
+		return redirect('home-login')
+	else:
+		usr = usr.get()
+	return render(request, 'frontendTemplates/account/privacy.html', {'usr':usr})
 
+@login_required(login_url='home-login')
+def subs(request):
+	usr = CustomUser.objects.filter(pk=request.user.id)
 
+	if not usr:
+		messages.error(request, 'Log In First!')
+		return redirect('home-login')
+	else:
+		usr = usr.get()
+	return render(request, 'frontendTemplates/account/subscription.html', {'usr':usr})
 
-
-
+@login_required(login_url='home-login')
+def profile_pic(request):
+	if request.is_ajax():
+		if 'file' in request.FILES.keys():
+			return HttpResponse(json.dumps({'key':'0', 'msg':request.FILES['file'].name}))
+		else:
+			return HttpResponse(json.dumps({'key':'0', 'msg':'No File Selected!'}))
 

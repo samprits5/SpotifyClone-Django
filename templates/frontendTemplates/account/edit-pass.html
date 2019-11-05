@@ -1,0 +1,62 @@
+
+{% extends "frontendTemplates/layouts/frame-account.html" %}
+
+{% block title %} Spotify Clone | Account Edit Password {% endblock %}
+
+{% block main-content %}
+
+
+
+<div class="col-9">
+    <div class="section-content">
+        <h3>Edit Password</h3>
+
+{% if messages %}
+<div class="alert alert-danger" role="alert">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+        <form action="{% url 'account-update-pass' %}" id="editForm" class="form-account form" method="post">
+
+        	{% csrf_token %}
+
+            <div class="form-group">
+                <label for="inputState__">Current Password</label>
+                <div class="form-input-bg">
+                    <input type="text" name="cur-pass" class="form-control" id="cur-pass">
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="inputState__">New Password</label>
+                <div class="form-input-bg">
+                    <input type="text" name="new-pass" class="form-control" id="new-pass">
+                </div>
+            </div>
+
+                <div class="form-group">
+                    <label for="inputState__">Confirm Password</label>
+                    <div class="form-input-bg">
+                        <input type="text" name="con-pass" class="form-control" id="con-pass">
+                    </div>
+                </div>
+
+            
+            <div class="text-right">
+                <button type="submit" class="button">Update</button>
+
+                <button type="button" onclick="location.href = '{% url 'account-index' %}'" class="button">Dismiss</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -29,15 +29,25 @@
                                 </a>
                             </li>
                             <li class="section-menu-nav-item">
-                                <a href="#" class="d-block section-menu-nav-link">
+                                <a href="{% url 'account-edit-pass' %}" class="d-block section-menu-nav-link">
                                     <span>
                                         <i class="fas fa-lock"></i>
                                     </span>
                                     Change password
                                 </a>
                             </li>
+
                             <li class="section-menu-nav-item">
-                                <a href="#" class="d-block section-menu-nav-link">
+                                <a href="{% url 'account-subs' %}" class="d-block section-menu-nav-link">
+                                    <span>
+                                        <i class="far fa-credit-card"></i>
+                                    </span>
+                                    Subscriptions
+                                </a>
+                            </li>
+
+                            <li class="section-menu-nav-item">
+                                <a href="{% url 'account-privacy' %}" class="d-block section-menu-nav-link">
                                     <span>
                                         <i class="fas fa-user-lock"></i>
                                     </span>
