@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
-from django.views.decorators.csrf import csrf_exempt
 from admin.user.models import CustomUser
 import re
 import json
@@ -169,7 +168,35 @@ def subs(request):
 def profile_pic(request):
 	if request.is_ajax():
 		if 'file' in request.FILES.keys():
-			return HttpResponse(json.dumps({'key':'0', 'msg':request.FILES['file'].name}))
+
+			if not request.FILES['file'].name.split('.')[-1] in ['jpg','png','jpeg']:
+
+				return HttpResponse(json.dumps({'key':'0', 'msg':'Invalid File Type!'}))
+
+			usr = CustomUser.objects.filter(pk=request.user.id)
+
+			if not usr:
+				messages.error(request, 'Log In First!')
+				return redirect('home-login')
+			else:
+				usr = usr.get()
+
+			if "team.jpg" in str(usr.profile_pic):
+
+				usr.profile_pic = request.FILES['file']
+
+				usr.save()
+
+			else:
+				usr.profile_pic.delete()
+
+				usr.profile_pic = request.FILES['file']
+
+				usr.save()
+
+
+			return HttpResponse(json.dumps({'key':'1', 'msg':'Success!'}))
+			
 		else:
 			return HttpResponse(json.dumps({'key':'0', 'msg':'No File Selected!'}))
 
