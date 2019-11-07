@@ -20,9 +20,9 @@
             <div class="player-controls-main">
                 <div class="player-controls">
                     <button id="repeat" class="player-controls-btn"></button>
-                    <button id="prev" class="player-controls-btn disabled"></button>
+                    <button id="prev" {% if pid != '-1' %} onclick="location.href='{% url 'player-index-id' pid %}'" {% endif %} class="player-controls-btn {% if pid == '-1' %} disabled {% endif %}"></button>
                     <button id="play" class="player-controls-btn"></button>
-                    <button id="next" class="player-controls-btn"></button>
+                    <button id="next" {% if nid != '-1' %} onclick="location.href='{% url 'player-index-id' nid %}'" {% endif %} class="player-controls-btn {% if nid == '-1' %} disabled {% endif %}"></button>
                     <div id="volume">
                         <button id="volume-icon" class="player-controls-btn"></button>
                         <div id="volume-range-main">
