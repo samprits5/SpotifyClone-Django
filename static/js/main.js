@@ -215,7 +215,45 @@ $(document).ready(function () {
 
             // others
             $('#addToFav').click(function () {
-                $(this).toggleClass('inFav');
+
+                var sid = $(this).attr('song_id');
+                
+                var csrftoken = getCookie('csrftoken');
+
+                var url = $(this).attr('fav-url');
+
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        }
+                    }
+                });
+
+                if (!$(this).hasClass('inFav')) {
+
+                    $.ajax({
+                        url : url,
+                        type : 'GET',
+                        data : {'action':'1',
+                                 'sid':sid},
+                        success : function(data) {
+
+                            data = JSON.parse(data);
+
+                            if (data['key'] == '0') {
+                                alert(data['msg']);
+                            } else {
+                                $('#addToFav').toggleClass('inFav');
+                            }
+                            
+                        }
+                 });
+
+                } else {
+                    
+                }
+
             });
         })();
     }
