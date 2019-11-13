@@ -14,8 +14,7 @@
 
                 </div>
                 <div class="player-song-addFav">
-                    <button type="button" fav-url="{% url 'player-favorites-add' %}" song-id="{{ song.id }}" class="addToFav" id="addToFav"></button>
-                    {% csrf_token %}
+                    <button type="button" fav-url="{% url 'player-favorites-add' %}" song-id="{{ song.id }}" class="addToFav {% if fav %} inFav {% endif %}" id="addToFav"></button>
                 </div>
             </div>
             <div class="player-controls-main">
