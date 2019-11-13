@@ -5,6 +5,9 @@ from admin.homepage.models import Homepage
 from django.contrib import messages
 from admin.song.models import Song
 from admin.user.models import CustomUser
+from admin.genre.models import Genre
+from admin.mood.models import Mood
+from admin.artist.models import Artist
 from admin.favorite.models import Favorite
 import random
 import json
@@ -174,3 +177,74 @@ def favorites_list(request, sid):
 		fav = True
 
 	return render(request, 'frontendTemplates/webplayer/favorite.html', {'fav_data':fav_data, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
+
+
+@login_required(login_url='home-login')
+def artist(request, sid):
+	
+	artist = Artist.objects.all()
+
+	# Getting user Object
+	user = CustomUser.objects.filter(pk=request.user.id)
+
+	if not user:
+		messages.error(request, "You must Log In!")
+		return redirect('home-login')
+	else:
+		user = user.get()
+
+	# Getting current song data
+	if find_song(sid):
+		song, prev_id, next_id = find_song(sid)
+	else:
+		song, prev_id, next_id = find_song(random_song_id())
+
+	# Getting if the song is in Favorite or not
+	fav = Favorite.objects.filter(song=song, user=user)
+
+	if not fav:
+		fav = False
+	else:
+		fav = True
+
+	return render(request, 'frontendTemplates/webplayer/artist.html', {'artist':artist, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
+
+
+@login_required(login_url='home-login')
+def artist_details(request, sid, aid):
+
+	artist = Artist.objects.filter(pk=aid)
+
+	if not artist:
+
+		art_songs = Song.objects.all()
+		
+	else:
+		artist = artist.get()
+
+		art_songs = Song.objects.filter(artist_name=artist)
+
+	# Getting user Object
+	user = CustomUser.objects.filter(pk=request.user.id)
+
+	if not user:
+		messages.error(request, "You must Log In!")
+		return redirect('home-login')
+	else:
+		user = user.get()
+
+	# Getting current song data
+	if find_song(sid):
+		song, prev_id, next_id = find_song(sid)
+	else:
+		song, prev_id, next_id = find_song(random_song_id())
+
+	# Getting if the song is in Favorite or not
+	fav = Favorite.objects.filter(song=song, user=user)
+
+	if not fav:
+		fav = False
+	else:
+		fav = True
+
+	return render(request, 'frontendTemplates/webplayer/artist-details.html', {'artist':artist, 'art_songs':art_songs, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
