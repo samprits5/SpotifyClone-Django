@@ -1,8 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_protect
-from django.middleware.csrf import get_token
 from admin.homepage.models import Homepage
 from admin.song.models import Song
 from admin.user.models import CustomUser
