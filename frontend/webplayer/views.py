@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
+from django.middleware.csrf import get_token
 from admin.homepage.models import Homepage
 from admin.song.models import Song
 from admin.user.models import CustomUser
@@ -56,12 +58,34 @@ def index_id(request, sid):
 
 	if find_song(sid):
 		song, prev_id, next_id = find_song(sid)
+
+		song = Song.objects.filter(pk=sid)
+
+		if not song:
+			return redirect('player-index-id', sid=random_song_id())
+		else:
+			song = song.get()
+
+
+		user = CustomUser.objects.filter(pk=request.user.id)
+
+		if not user:
+			return redirect('home-login')
+		else:
+			user = user.get()
+
+		fav = Favorite.objects.filter(song=song, user=user)
+
+		if not fav:
+			fav = False
+		else:
+			fav = True
 	else:
 		return redirect('player-index-id', sid=random_song_id())
 
-	return render(request, 'frontendTemplates/webplayer/index.html', {'data':data, 'song':song, 'pid': prev_id, 'nid':next_id})
+	return render(request, 'frontendTemplates/webplayer/index.html', {'data':data, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
 
-
+@login_required(login_url='home-login')
 def favorites(request):
 	if request.is_ajax():
 
@@ -71,7 +95,7 @@ def favorites(request):
 		if not 'sid' in request.POST.keys():
 			return HttpResponse(json.dumps({'key':'0', 'msg':'Missing Parameters!'}))
 
-		if request.POST['actiion'] == '1':
+		if request.POST['action'] == '1':
 
 			song = Song.objects.filter(pk=request.POST['sid'])
 
@@ -93,6 +117,31 @@ def favorites(request):
 			fav.save()
 
 			return HttpResponse(json.dumps({'key':'1', 'msg':'Added to Favorites!'}))
+
+		elif request.POST['action'] == '2':
+
+			song = Song.objects.filter(pk=request.POST['sid'])
+
+			if not song:
+				return HttpResponse(json.dumps({'key':'0', 'msg':'Invalid Song ID!'}))
+			else:
+				song = song.get()
+
+
+			user = CustomUser.objects.filter(pk=request.user.id)
+
+			if not user:
+				return HttpResponse(json.dumps({'key':'0', 'msg':'Invalid User ID!'}))
+			else:
+				user = user.get()
+
+			fav = Favorite.objects.filter(song=song, user=user)
+
+			if not fav:
+				return HttpResponse(json.dumps({'key':'0', 'msg':'Not in Favorites!'}))
+			else:
+				fav = fav.delete()
+				return HttpResponse(json.dumps({'key':'1', 'msg':'Record Deleted!'}))
 
 
 
