@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from admin.homepage.models import Homepage
+from django.contrib import messages
 from admin.song.models import Song
 from admin.user.models import CustomUser
 from admin.favorite.models import Favorite
@@ -143,3 +144,33 @@ def favorites(request):
 
 
 
+@login_required(login_url='home-login')
+def favorites_list(request, sid):
+
+	# Getting user Object
+	user = CustomUser.objects.filter(pk=request.user.id)
+
+	if not user:
+		messages.error(request, "You must Log In!")
+		return redirect('home-login')
+	else:
+		user = user.get()
+
+	# Getting all favorites song data
+	fav_data = Favorite.objects.filter(user=user)
+
+	# Getting current song data
+	if find_song(sid):
+		song, prev_id, next_id = find_song(sid)
+	else:
+		song, prev_id, next_id = find_song(random_song_id())
+
+	# Getting if the song is in Favorite or not
+	fav = Favorite.objects.filter(song=song, user=user)
+
+	if not fav:
+		fav = False
+	else:
+		fav = True
+
+	return render(request, 'frontendTemplates/webplayer/favorite.html', {'fav_data':fav_data, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})

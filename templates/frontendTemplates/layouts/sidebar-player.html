@@ -26,10 +26,10 @@
                 </nav>
                 <div class="plNames-main">
                     <p>Playlist</p>
-                    <button type="button" id="createPL">
+                    <a href="{% url 'player-favorites' sid=song.id %}" id="createPL">
                         <i class="fas fa-plus-circle"></i>
                         Favorites
-                    </button>
+                    </a>
 
                 </div>
                 <a href="{% url 'account-index' %}" class="userName">
