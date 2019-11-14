@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from admin.homepage.models import Homepage
 from django.contrib import messages
 from admin.song.models import Song
@@ -462,29 +463,67 @@ def library(request, sid):
 @login_required(login_url='home-login')
 def search(request, sid):
 
+	if request.method == 'GET':
 
-	# Getting user Object
-	user = CustomUser.objects.filter(pk=request.user.id)
+		if 'search' in request.GET.keys():
+			keyword = request.GET['search']
 
-	if not user:
-		messages.error(request, "You must Log In!")
-		return redirect('home-login')
-	else:
-		user = user.get()
+			song_data = Song.objects.filter(
+				Q(song_name__icontains=keyword) |
+				Q(artist_name__artist_name__icontains=keyword) |
+				Q(mood_name__mood_name__icontains=keyword) |
+				Q(genre_name__genre_name__icontains=keyword)
+				)
 
-	# Getting current song data
-	if find_song(sid):
-		song, prev_id, next_id = find_song(sid)
-	else:
-		song, prev_id, next_id = find_song(random_song_id())
+			# Getting user Object
+			user = CustomUser.objects.filter(pk=request.user.id)
 
-	# Getting if the song is in Favorite or not
-	fav = Favorite.objects.filter(song=song, user=user)
+			if not user:
+				messages.error(request, "You must Log In!")
+				return redirect('home-login')
+			else:
+				user = user.get()
 
-	if not fav:
-		fav = False
-	else:
-		fav = True
+			# Getting current song data
+			if find_song(sid):
+				song, prev_id, next_id = find_song(sid)
+			else:
+				song, prev_id, next_id = find_song(random_song_id())
 
-	return render(request, 'frontendTemplates/webplayer/search.html', {'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
+			# Getting if the song is in Favorite or not
+			fav = Favorite.objects.filter(song=song, user=user)
+
+			if not fav:
+				fav = False
+			else:
+				fav = True
+
+			return render(request, 'frontendTemplates/webplayer/search.html', {'song_data':song_data,'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
+
+
+		else:
+			# Getting user Object
+			user = CustomUser.objects.filter(pk=request.user.id)
+
+			if not user:
+				messages.error(request, "You must Log In!")
+				return redirect('home-login')
+			else:
+				user = user.get()
+
+			# Getting current song data
+			if find_song(sid):
+				song, prev_id, next_id = find_song(sid)
+			else:
+				song, prev_id, next_id = find_song(random_song_id())
+
+			# Getting if the song is in Favorite or not
+			fav = Favorite.objects.filter(song=song, user=user)
+
+			if not fav:
+				fav = False
+			else:
+				fav = True
+
+			return render(request, 'frontendTemplates/webplayer/search.html', {'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
 

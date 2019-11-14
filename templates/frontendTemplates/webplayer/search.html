@@ -58,8 +58,8 @@
 
 <!-- Main-Section -->
 <div id="section-wrapper">
-        <form action="" class="playerSearch" id="playerSearch">
-            <input type="text" placeholder="Search Here.." class="playerSearch-input" id="playerSearch-input" name="playerSearch-input">
+        <form action="{% url 'player-search' sid=song.id %}" class="playerSearch" id="playerSearch">
+            <input type="text" placeholder="Search Here..." class="playerSearch-input" id="playerSearch-input" name="search">
             <button type="submit" id="playerSearch-submit" class="playerSearch-submit">
                 <i class="fas fa-search"></i>
             </button>
@@ -67,19 +67,31 @@
         <section id="section-main">
             <div class="music">
                 <div class="music-page">
+                    {% if song_data is None %}
+                    <p>Your Search Results will appear Here!</p>
+                    {% elif song_data|length == 0 %}
+                    <p>Search Result : </p>
+                    <div class="music-row">
+                        <p>Sorry! No songs Found!</p>
+                    </div>
+                    {% else %}
                     <p>Search Results</p>
                     <div class="music-row">
-                        <a href="#" class="music-col">
+                        {% for row in song_data %}
+                        <a href="{% url 'player-search' sid=row.id %}?search={{ request.GET.search }}" class="music-col">
                             <div class="music-img">
                                 {% static "./images/home.jpg" as baseURL %}
-                                <img src='{{ baseURL|cut:".jpg" }}1.jpg' alt="night" class="img-fluid">
+                                <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
                                 <button class="music-playBtn">
                                     <img src='{% static "./images/play.svg" %}' alt="play">
                                 </button>
                             </div>
-                            <h3>Night</h3>
+                            <h3>{{ row.song_name }}</h3>
+                            <h5>{{ row.artist_name.artist_name }}</h5>
                         </a>
+                        {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </section>
