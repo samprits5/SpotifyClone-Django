@@ -1,0 +1,128 @@
+{% extends "frontendTemplates/layouts/frame-player.html" %}
+
+{% block title %} Spotify Clone | Webplayer {% endblock %}
+
+{% block main-content %}
+
+
+<section id="section-main">
+    <div class="filterNav">
+        <a href="{% url 'player-index-id' sid=song.id %}" class="filterNav-link">Featured</a>
+        <a href="{% url 'player-category' sid=song.id %}" class="filterNav-link active">Categories</a>
+        <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link">Genre</a>
+        <a href="{% url 'player-mood' sid=song.id %}" class="filterNav-link">Mood</a>
+        <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link">Artist</a>
+        <a href="{% url 'player-favorites' sid=song.id %}" class="filterNav-link">Favorites</a>
+    </div>
+    <div class="music">
+        <div class="music-page">
+            <div class="music-head">
+                <div class="music-head-item">
+                    <h1>New Releases</h1>
+                </div>
+            </div>
+            {% load static %}
+            <div class="music-row">
+                {% if not data %}
+                    <h6>There are no Featured Songs!</h6>
+                {% else %}
+            	{% for row in data %}
+                <a href="{% url 'player-category' sid=row.song_id %}" class="music-col">
+                    <div class="music-img">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                        <button class="music-playBtn">
+                            <img src='{% static "./images/play.svg" %}' alt="play">
+                        </button>
+                    </div>
+                    <h3>{{ row.name }}</h3>
+                    <h5>{{ row.artist }}</h5>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="music-head">
+                <div class="music-head-item">
+                    <h1>Genre List</h1>
+                </div>
+            </div>
+
+            <div class="music-row">
+                {% if not genre %}
+                    <h6>There are no Genres!</h6>
+                {% else %}
+            	{% for row in genre %}
+                <a href='{% url "player-genre-details" sid=song.id gid=row.id %}' class="music-col">
+                    <div class="music-img">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                        <button class="music-playBtn">
+                            <img src='{% static "./images/play.svg" %}' alt="play">
+                        </button>
+                    </div>
+                    <h3>{{ row.genre_name }}</h3>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+
+            <div class="music-head">
+                <div class="music-head-item">
+                    <h1>All Moods</h1>
+                </div>
+            </div>
+
+            <div class="music-row">
+                {% if not mood %}
+                    <h6>There are no Moods!</h6>
+                {% else %}
+            	{% for row in mood %}
+                <a href='{% url "player-mood-details" sid=song.id mid=row.id %}' class="music-col">
+                    <div class="music-img">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                        <button class="music-playBtn">
+                            <img src='{% static "./images/play.svg" %}' alt="play">
+                        </button>
+                    </div>
+                    <h3>{{ row.mood_name }}</h3>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+
+
+            <div class="music-head">
+                <div class="music-head-item">
+                    <h1>Singer's List</h1>
+                </div>
+            </div>
+
+            <div class="music-row">
+                {% if not artist %}
+                    <h6>There are no Singers!</h6>
+                {% else %}
+            	{% for row in artist %}
+                <a href='{% url "player-artist-details" sid=song.id aid=row.id %}' class="music-col">
+                    <div class="music-img">
+                        {% static "./images/home.jpg" as baseURL %}
+                        <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                        <button class="music-playBtn">
+                            <img src='{% static "./images/play.svg" %}' alt="play">
+                        </button>
+                    </div>
+                    <h3>{{ row.artist_name }}</h3>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

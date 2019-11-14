@@ -390,3 +390,40 @@ def genre_details(request, sid, gid):
 		fav = True
 
 	return render(request, 'frontendTemplates/webplayer/genre-details.html', {'genre':genre, 'genre_songs':genre_songs, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})
+
+
+@login_required(login_url='home-login')
+def category(request, sid):
+	
+	data = Homepage.objects.all()
+
+	genre = Genre.objects.all()
+
+	mood = Mood.objects.all()
+
+	artist = Artist.objects.all()
+
+	# Getting user Object
+	user = CustomUser.objects.filter(pk=request.user.id)
+
+	if not user:
+		messages.error(request, "You must Log In!")
+		return redirect('home-login')
+	else:
+		user = user.get()
+
+	# Getting current song data
+	if find_song(sid):
+		song, prev_id, next_id = find_song(sid)
+	else:
+		song, prev_id, next_id = find_song(random_song_id())
+
+	# Getting if the song is in Favorite or not
+	fav = Favorite.objects.filter(song=song, user=user)
+
+	if not fav:
+		fav = False
+	else:
+		fav = True
+
+	return render(request, 'frontendTemplates/webplayer/category.html', {'genre':genre, 'mood':mood, 'artist':artist, 'data':data, 'song':song, 'pid': prev_id, 'nid':next_id, 'fav':fav})

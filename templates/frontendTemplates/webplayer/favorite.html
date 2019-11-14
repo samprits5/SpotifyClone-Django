@@ -8,7 +8,7 @@
 <section id="section-main">
     <div class="filterNav">
         <a href="{% url 'player-index-id' sid=song.id %}" class="filterNav-link">Featured</a>
-        <a href="#" class="filterNav-link">Categories</a>
+        <a href="{% url 'player-category' sid=song.id %}" class="filterNav-link">Categories</a>
         <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link">Genre</a>
         <a href="{% url 'player-mood' sid=song.id %}" class="filterNav-link">Mood</a>
         <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link">Artist</a>

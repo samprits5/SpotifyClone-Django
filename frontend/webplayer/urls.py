@@ -16,5 +16,7 @@ urlpatterns = [
     path('genre/<int:sid>/', views.genre, name='player-genre'),
     path('genre/songs/<int:sid>/<int:gid>', views.genre_details, name='player-genre-details'),
 
+    path('category/<int:sid>/', views.category, name='player-category'),
+
     path('addtofavorites/', views.favorites, name='player-favorites-add'),
 ]
