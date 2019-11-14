@@ -9,29 +9,29 @@
     <div class="filterNav">
         <a href="{% url 'player-index-id' sid=song.id %}" class="filterNav-link">Featured</a>
         <a href="{% url 'player-category' sid=song.id %}" class="filterNav-link">Categories</a>
-        <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link">Genre</a>
+        <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link active">Genre</a>
         <a href="{% url 'player-mood' sid=song.id %}" class="filterNav-link">Mood</a>
-        <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link active">Artist</a>
+        <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link">Artist</a>
         <a href="{% url 'player-favorites' sid=song.id %}" class="filterNav-link">Favorites</a>
     </div>
     <div class="music">
         <div class="music-page">
             <div class="music-head">
                 <div class="music-head-item">
-                    {% if not artist %}
-                        <h1>No such singer! Showing All Songs!</h1>
+                    {% if not genre %}
+                        <h1>No such Genre! Showing All Songs!</h1>
                     {% else %}
-                        <h1>{{ artist.artist_name }}'s Songs</h1>
+                        <h1>{{ genre.genre_name }} Genre Songs</h1>
                     {% endif %}
                 </div>
             </div>
             {% load static %}
             <div class="music-row">
-                {% if art_songs|length == 0 %}
+                {% if genre_songs|length == 0 %}
                     <p>No Songs Found!</p>
                 {% else %}
-            	{% for row in art_songs %}
-                <a href='{% url "player-artist-details" sid=row.id aid=row.artist_name.id %}' class="music-col">
+            	{% for row in genre_songs %}
+                <a href='{% url "player-genre-details" sid=row.id gid=row.genre_name.id %}' class="music-col">
                     <div class="music-img">
                         {% static "./images/home.jpg" as baseURL %}
                         <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">

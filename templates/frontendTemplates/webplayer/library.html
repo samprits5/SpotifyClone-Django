@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width ,  initial-scale=1.0" name="viewport">
+    <!-- CSS Libraries -->
+    <link href='{% static "./css/bootstrap.min.css" %}' rel="stylesheet">
+
+    <link href='{% static "./css/fontawesome.all.min.css" %}' rel="stylesheet">
+
+    <link href='{% static "./css/main.css" %}' rel="stylesheet">
+
+    <title>Spotify Clone | Webplayer</title>
+</head>
+
+<!-- Sidebar -->
+<div id="root">
+<div class="flexWrapper">
+<header id="header">
+    <nav class="nav-main">
+        <a href="{% url 'home-index' %}" class="nav-brand">Spotify</a>
+        <ul>
+            <li class="nav-item">
+                <a href="{% url 'player-index-id' sid=song.id %}" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'player-search' sid=song.id %}" class="nav-link">
+                    <i class="fas fa-search"></i>
+                    Search
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'player-library' sid=song.id %}" class="nav-link active">
+                    <i class="fas fa-align-right"></i>
+                    Library
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="plNames-main">
+        <p>Playlist</p>
+        <a href="{% url 'player-favorites' sid=song.id %}" id="createPL">
+            <i class="fas fa-plus-circle"></i>
+            Favorites
+        </a>
+
+    </div>
+    <a href="{% url 'account-index' %}" class="userName">
+        <i class="far fa-user"></i>
+        {{user.name}}
+    </a>
+</header>
+
+<!-- Main-Section -->
+<section id="section-main">
+        <div class="music">
+            <div class="music-page">
+                <div class="music-head">
+                    <div class="music-head-item">
+                        <h1>All Songs Library!</h1>
+                    </div>
+                </div>
+                {% load static %}
+                <div class="music-row">
+                    {% if song_data|length == 0 %}
+                        <h6>There are no Songs!</h6>
+                    {% else %}
+                    {% for row in song_data %}
+                    <a href='{% url "player-library" sid=row.id %}' class="music-col">
+                        <div class="music-img">
+                            {% static "./images/home.jpg" as baseURL %}
+                            <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
+                            <button class="music-playBtn">
+                                <img src='{% static "./images/play.svg" %}' alt="play">
+                            </button>
+                        </div>
+                        <h3>{{ row.song_name }}</h3>
+                        <h5>{{ row.artist_name.artist_name }}</h5>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Player -->
+</div>
+{% load static %}
+        <footer id="player-main" class="player">
+            <div class="player-song">
+                <div class="player-song-img">
+                    <img src='{% static "./images/piano.jpg" %}' alt="piano">
+                </div>
+
+                <div class="player-song-name">
+                    <a href="#">
+                        <h3>{{ song.song_name }}</h3>
+                    </a>
+                    <a href="#">By {{ song.artist_name }}</a>
+
+                </div>
+                <div class="player-song-addFav">
+                    <button type="button" fav-url="{% url 'player-favorites-add' %}" song-id="{{ song.id }}" class="addToFav {% if fav %} inFav {% endif %}" id="addToFav"></button>
+                </div>
+            </div>
+            <div class="player-controls-main">
+                <div class="player-controls">
+                    <button id="repeat" class="player-controls-btn"></button>
+                    <button id="prev" {% if pid != '-1' %} onclick="location.href='{% url 'player-index-id' pid %}'" {% endif %} class="player-controls-btn {% if pid == '-1' %} disabled {% endif %}"></button>
+                    <button id="play" class="player-controls-btn"></button>
+                    <button id="next" {% if nid != '-1' %} onclick="location.href='{% url 'player-index-id' nid %}'" {% endif %} class="player-controls-btn {% if nid == '-1' %} disabled {% endif %}"></button>
+                    <div id="volume">
+                        <button id="volume-icon" class="player-controls-btn"></button>
+                        <div id="volume-range-main">
+                            <div id="volume-range">
+                                <div id="volume-range-bar" data-value="100"></div>
+                                <div id="volume-range-thumb"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="player-controls-duration">
+                    <span id="startTime">00:00</span>
+                    <div id="duration-range-main">
+                        <div id="duration-range">
+                            <div id="duration-range-bar"></div>
+                            <div id="duration-range-thumb"></div>
+                        </div>
+                    </div>
+                    <span id="endTime">{{ song.song_length }}</span>
+                </div>
+
+                <audio id="musicPlayer" src="{{ song.song_file.url }}"></audio>
+            </div>
+            <!-- <div class="player-menu"></div> -->
+        </footer>
+    </div>
+
+    <!-- All Javascript/Jqueries -->
+    <script src='{% static "./js/jquery.min.js" %}'></script>
+
+    <script src='{% static "./js/bootstrap.bundle.min.js" %}'></script>
+
+    <script src='{% static "./js/jquery-ui.min.js" %}'></script>
+
+    <script src='{% static "./js/main.js" %}'></script>
+</body>
+
+</html>

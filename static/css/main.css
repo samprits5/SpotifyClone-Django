@@ -1215,6 +1215,75 @@ a.viewMore:hover {
   font-size: 1.5rem;
 }
 
+.hideIt {
+  display: none !important;
+}
+
+.showIt {
+  display: block !important;
+}
+
+#section-wrapper {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+#section-wrapper #section-main {
+  padding: 1.5rem;
+}
+
+.playerSearch {
+  position: relative;
+}
+.playerSearch-submit, .playerSearch-input {
+  height: 80px;
+}
+.playerSearch-input {
+  width: 100%;
+  display: block;
+  font-size: 1.75rem;
+  padding: 1rem 2rem;
+  background: rgba(0, 3, 16, 0.5);
+  font-weight: 700;
+}
+.playerSearch-submit {
+  position: absolute;
+  top: 0;
+  background: #212325;
+  right: 0;
+  width: 80px;
+  color: #20bf6b;
+}
+.playerSearch-submit i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.75rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  body {
+    min-width: 1024px;
+    overflow-x: scroll;
+  }
+
+  #root {
+    min-width: 1024px;
+    overflow-x: scroll;
+  }
+}
+
+
+
 /*||  ======================  Account Ends  ======================  ||*/
 /*||  ======================  Main Css Ends  ======================  ||*/
 
