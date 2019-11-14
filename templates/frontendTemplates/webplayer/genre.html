@@ -9,29 +9,25 @@
     <div class="filterNav">
         <a href="{% url 'player-index-id' sid=song.id %}" class="filterNav-link">Featured</a>
         <a href="#" class="filterNav-link">Categories</a>
-        <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link">Genre</a>
+        <a href="{% url 'player-genre' sid=song.id %}" class="filterNav-link active">Genre</a>
         <a href="{% url 'player-mood' sid=song.id %}" class="filterNav-link">Mood</a>
-        <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link active">Artist</a>
+        <a href="{% url 'player-artist' sid=song.id %}" class="filterNav-link">Artist</a>
         <a href="{% url 'player-favorites' sid=song.id %}" class="filterNav-link">Favorites</a>
     </div>
     <div class="music">
         <div class="music-page">
             <div class="music-head">
                 <div class="music-head-item">
-                    {% if not artist %}
-                        <h1>No such singer! Showing All Songs!</h1>
-                    {% else %}
-                        <h1>{{ artist.artist_name }}'s Songs</h1>
-                    {% endif %}
+                    <h1>All Genres</h1>
                 </div>
             </div>
             {% load static %}
             <div class="music-row">
-                {% if art_songs|length == 0 %}
-                    <p>No Songs Found!</p>
+                {% if not genre %}
+                    <h6>No Genres Available!</h6>
                 {% else %}
-            	{% for row in art_songs %}
-                <a href='{% url "player-artist-details" sid=row.id aid=row.artist_name.id %}' class="music-col">
+            	{% for row in genre %}
+                <a href='{% url "player-genre-details" sid=song.id gid=row.id %}' class="music-col">
                     <div class="music-img">
                         {% static "./images/home.jpg" as baseURL %}
                         <img src='{{ baseURL|cut:".jpg" }}{{ forloop.counter }}.jpg' alt="night" class="img-fluid">
@@ -39,8 +35,7 @@
                             <img src='{% static "./images/play.svg" %}' alt="play">
                         </button>
                     </div>
-                    <h3>{{ row.song_name }}</h3>
-                    <h5>{{ row.artist_name.artist_name }}</h5>
+                    <h3>{{ row.genre_name }}</h3>
                 </a>
                 {% endfor %}
                 {% endif %}
