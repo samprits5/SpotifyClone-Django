@@ -19,6 +19,7 @@ from . import settings
 
 urlpatterns = [
     path('admin/', include('admin.urls')),
+    path('api/', include('api.urls')),
     path('', include('frontend.urls')),
 ]
 

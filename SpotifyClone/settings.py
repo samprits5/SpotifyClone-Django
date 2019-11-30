@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'admin.user',
     'admin.favorite',
     'admin.homepage',
+    'api',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = "user.CustomUser" 
