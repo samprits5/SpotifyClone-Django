@@ -1270,7 +1270,7 @@ a.viewMore:hover {
   font-size: 1.75rem;
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen {
   body {
     min-width: 1024px;
     overflow-x: scroll;

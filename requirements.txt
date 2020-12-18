@@ -1,0 +1,15 @@
+asgiref==3.3.1
+certifi==2020.12.5
+chardet==4.0.0
+Django==3.1.4
+django-storages==1.11
+djangorestframework==3.12.2
+dropbox==11.0.0
+idna==2.10
+ply==3.11
+pytz==2020.4
+requests==2.25.1
+six==1.15.0
+sqlparse==0.4.1
+stone==3.2.1
+urllib3==1.26.2

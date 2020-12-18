@@ -166,8 +166,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # DropBox Configuration
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
-DROPBOX_OAUTH2_TOKEN = '6CvkSojDEyAAAAAAAAAAN_h31MKLLmumYWDC5j0j8smqafT01OYrC7lUdr1uY_IW'
+# DROPBOX_OAUTH2_TOKEN = ''
 
-DROPBOX_TIMEOUT = None
+# DROPBOX_TIMEOUT = None
